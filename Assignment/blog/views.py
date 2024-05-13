@@ -61,7 +61,7 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     def handle_no_permission(self):
         raise PermissionDenied("You are not allowed to Delete this post.")
     
-@login_required()
+@login_required
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     comments = post.comment_set.all()
@@ -76,7 +76,6 @@ def post_detail(request, slug):
     else:
         form = CommentForm()
     return render(request, 'post_detail.html', {'post': post, 'comments': comments, 'comment_form': form})
-
 
 class DeleteCommentView(LoginRequiredMixin, DeleteView):
     model = Comment
