@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<style>
+
+  #block {
+    color: black;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 15px;
+  }
+  #block p{
+    text-align:center;
+  }
+  img{
+    width:20%;
+  }
+  #comments{
+    text-align:center;
+  }
+</style>
+{% endblock head %}
+{% block header %}
+
+<div style="
+display: inline-flex;
+">
+<a href="{% url 'profile' %}"><span class="material-symbols-outlined">
+  account_circle
+  </span></a> &nbsp
+<a href="{% url 'logout' %}">Logout</a>
+</div>
+
+{% endblock header %}
+
+
+{% block container %}
+<h1>{{ post.title }}</h1>
+<p>Category: {{ post.category }}</p>
+<p>Author: {{ post.author.name }}</p>
+{% endblock %}
+
+
+
+{% block body %}
+<div id='block'>
+
+  {% if post.author == user %}
+  <a href="{% url 'post_update' post.slug %}">Update</a>&nbsp;<a href="{% url 'post_delete' post.slug %}">Delete</a>
+  {% endif %}
+
+  <p>
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;"><br>
+    {% endif %}
+    {{ post.content }}
+  </p>
+
+</div>
+
+<div id="comments">
+<!-- Display comments -->
+<h2>Comments</h2>
+<ul>
+  {% for comment in comments %}
+    <li>{{ comment.text }} - by <span style="color:#364fc7;">{{ comment.user.name }}</span> on {{ comment.created_at }}</li>
+    {% if comment.user == user or post.author == user %}
+      <form action="{% url 'delete_comment' comment.pk %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
+    {% endif %}
+  {% empty %}
+    <li>No comments yet.</li>
+  {% endfor %}
+</ul>
+
+<!-- Add comment form -->
+{% if user.is_authenticated %}
+  <h2>Add Comment</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ comment_form.as_table }}
+    <button type="submit">Submit</button>
+  </form>
+{% else %}
+  <p>Please <a href="{% url 'login' %}">login</a> to add a comment.</p>
+{% endif %}
+</div>
+{% endblock %}

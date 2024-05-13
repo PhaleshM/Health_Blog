@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+
+<!--  This site was created in Webflow. http://www.webflow.com  -->
+<!--  Last Published: Fri May 15 2020 11:36:12 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5ea1b995c6b4c13faa406a09" data-wf-site="5ea1b995c6b4c10f74406a08">
+
+<head>
+  <meta charset="utf-8" />
+  <title>GIGL Assignment</title>
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+  <meta property="og:type" content="website" />
+  <meta content="summary_large_image" name="twitter:card" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="Webflow" name="generator" />
+  <link href={% static 'css/style.css' %} rel="stylesheet" type="text/css" />
+  <link href={% static 'css/normalize.css' %} rel="stylesheet" type="text/css" />
+  <link href={% static 'css/normalize.css' %} rel="stylesheet" type="text/css" />
+  <link href={% static 'css/lander-409e35.webflow.css' %} rel="stylesheet" type="text/css" />
+  <link href={% static 'images/favicon.ico' %} rel="shortcut icon" type="image/x-icon" />
+  <link href={% static 'images/webclip.png' %} rel="apple-touch-icon" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <style>
+    .errorlist {
+      color: #ff0000;
+      font-size: 14px;
+      margin-bottom: 10px;
+  }
+  </style>
+  {% block head %}
+  
+  {% endblock head %}
+
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="container" style="border-radius: 0;">
+      <div class="row items-center mb-lg">
+        <div class="column align-left">
+          <a href="{% url 'post_list' %}" aria-current="page" class="w-inline-block w--current">
+            <div class="logo" style="height: 51px;"> Health Blog Platform</div>
+          </a>
+          {% block header %}
+          
+          {% endblock header %}
+          
+        </div>
+        <!-- <div class="column align-right">
+          <div class="row items-center">
+            <a href="#" class="u mr-lg">Log in</a><a href="#" class="button main w-button">Sign in<span
+                data-feather="arrow-right" class="icon mr-md-n ml-md">•</span></a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </header>
+  <div class="section overflow-hidden" style="top: -30px;">
+    <div class="container mt-2xl mb-3xl">
+        <div class="row">
+            <div class="column align-center">
+                {% block container %}
+      
+                {% endblock container %}
+          
+            </div>
+          </div>
+        </div>
+    <div class="circle"></div>
+  </div>
+  {% block body %}
+      
+  {% endblock body %}
+
+
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5ea1b995c6b4c10f74406a08"
+    type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+  </script>
+  <script src={% static 'js/webflow.js' %} type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script>
+    feather.replace();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+
+{% block head %}
+<style>
+  #posts{
+    margin-top: 20px;
+    display: flex;
+    z-index: 34;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+</style>
+{% endblock head %}
+
+
+{% block header %}
+    {% if user.is_authenticated %}
+    <div style="
+    display: inline-flex;
+    ">
+    <a href="{% url 'logout' %}">Logout</a>
+    </div>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+{% endblock header %}
+
+
+{% block container %}
+
+    {% if user.is_authenticated %}
+    <h1>User Profile</h1>
+    <p>Name: {{ user_data.name }}</p>
+    <p>Email: {{ user_data.email }}</p>
+    <p>Phone Number: {{ user_data.phone_number }}</p>
+    {% endif %}
+
+{% endblock container %}
+
+{% block body %}
+<div style="text-align:center;">
+    <h2>Posts</h2>
+    <div id="posts">
+        {% for post in posts %}
+          <div class='block'>
+            <h2><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+            <p><i>status: {{ post.status}}</i></p>
+          </div>
+        {% endfor %}
+    </div>
+
+    <h2>Comments</h2>
+    <ul>
+    {% for comment in comments %}
+        <li>{{ comment.text|slice:":20" }} -to {{ comment.post.title }} on {{ comment.created_at }}
+        {% if comment.user == user or post.author == user %}
+            <form action="{% url 'delete_comment' comment.pk %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        {% endif %}
+        </li>
+    {% empty %}
+        <li>No comments yet.</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock body %}
+
+

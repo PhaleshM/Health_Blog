@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% if user.is_authenticated %}
+<div style="
+display: inline-flex;
+">
+<a href="{% url 'profile' %}"><span class="material-symbols-outlined">
+  account_circle
+  </span></a> &nbsp
+<a href="{% url 'logout' %}">Logout</a>
+</div>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+{% endblock header %}
+
+
+{% block container %}
+  <h1>New Post</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
+
+{% block body %}
+
+{% endblock body %}

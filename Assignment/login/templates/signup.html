@@ -1,0 +1,81 @@
+{% extends "index.html" %}
+{% block head %}
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+    }
+    
+    form {
+        width: 450px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+
+    }
+    
+    /* Form Elements */
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    input[type="email"],
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    input[type="checkbox"] {
+        margin-right: 5px;
+    }
+    
+    /* Error Styles */
+    .error {
+        color: #ff0000;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    /* Button Styles */
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 480px) {
+        form {
+            padding: 10px;
+        }
+    }
+
+
+</style>
+{% endblock head %}
+{% block container %}
+        <h1>Sign Up</h1>
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign Up</button>
+        </form>
+{% endblock %}

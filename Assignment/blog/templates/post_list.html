@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+  #posts{
+    margin-top: 20px;
+    display: flex;
+    z-index: 34;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .block {
+    background-color: #edf2ff;
+    color: #ff0000;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 15px;
+  }
+  .pagination{
+    text-align:center;
+  }
+</style>
+{% endblock head %}
+
+{% block header %}
+{% if user.is_authenticated %}
+<div style="
+display: inline-flex;
+">
+<a href="{% url 'post_create' %}"><span class="material-symbols-outlined">
+  post_add
+  </span></a> &nbsp
+<a href="{% url 'profile' %}"><span class="material-symbols-outlined">
+  account_circle
+  </span></a> &nbsp
+<a href="{% url 'logout' %}">Logout</a>
+</div>
+{% else %}
+<div>
+<a href="{% url 'signup' %}">SignUp</a>
+<a href="{% url 'login' %}">LogIn</a>
+</div>
+{% endif %}
+{% endblock header %}
+{% block container %}
+  <h1>Posts</h1>
+  <form method="GET" action="{% url 'post_list' %}">
+    <input type="text" name="q" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
+{% endblock %}
+
+{% block body %}
+<div id="posts">
+  {% for post in posts %}
+    <div class='block'>
+      <h3><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h3>
+      <p><i>{{ post.content|slice:":50" }}</i></p>
+    </div>
+  {% endfor %}
+</div>
+
+{% if is_paginated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+{% endblock body %}
