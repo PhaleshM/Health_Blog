@@ -19,7 +19,7 @@ This is a health blog platform built using Django, a high-level Python web frame
 1. Clone the repository:
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/PhaleshM/Health_Blog.git
    ```
 
 2. Install the required dependencies:
@@ -54,3 +54,5 @@ This is a health blog platform built using Django, a high-level Python web frame
 - Sign up or log in to create new posts or comment on existing ones.
 - Use the search bar to find posts by title or content.
 - Click on a post to view its details, including comments.
+- Users can view their posts and comments in their profile.
+- Only the owner of a comment and the author of the post on which the comment is made can delete the comment.

@@ -18,6 +18,99 @@
   #comments{
     text-align:center;
   }
+
+  .comment-form {
+    display: inline-table;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  .comment-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  .comment-form input[type="text"],
+  .comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  .comment-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .comment-form button:hover {
+    background-color: #0056b3;
+  }
+
+
+  /* Style for the comments section */
+  .comments-section {
+    display: inline-grid;
+    width: 50%;
+    margin-top: 20px;
+  }
+  .comments-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .comments-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .comments-section li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  .comments-section li span {
+    color: #364fc7;
+    font-weight: bold;
+  }
+  .comments-section li form {
+    display: inline;
+    margin-left: 10px;
+  }
+  .comments-section li form button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .comments-section li form button:hover {
+    background-color: #c82333;
+  }
+
+  /* Style for the delete button */
+  .delete-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+
+
 </style>
 {% endblock head %}
 {% block header %}
@@ -59,32 +152,36 @@ display: inline-flex;
 </div>
 
 <div id="comments">
-<!-- Display comments -->
-<h2>Comments</h2>
-<ul>
-  {% for comment in comments %}
-    <li>{{ comment.text }} - by <span style="color:#364fc7;">{{ comment.user.name }}</span> on {{ comment.created_at }}</li>
-    {% if comment.user == user or post.author == user %}
-      <form action="{% url 'delete_comment' comment.pk %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit">Delete</button>
-      </form>
-    {% endif %}
-  {% empty %}
-    <li>No comments yet.</li>
-  {% endfor %}
-</ul>
+<!-- Comments section -->
+<div class="comments-section">
+  <h2>Comments</h2>
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.text }} - by <span>{{ comment.user.name }}</span> on {{ comment.created_at }}
+        {% if comment.user == user or post.author == user %}
+          <form action="{% url 'delete_comment' comment.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="delete-button">Delete</button>
+          </form>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No comments yet.</li>
+    {% endfor %}
+  </ul>
+</div>
 
-<!-- Add comment form -->
+<!-- Comment form -->
 {% if user.is_authenticated %}
-  <h2>Add Comment</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ comment_form.as_table }}
-    <button type="submit">Submit</button>
-  </form>
-{% else %}
-  <p>Please <a href="{% url 'login' %}">login</a> to add a comment.</p>
+  <div class="comment-form">
+    <h2>Add Comment</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ comment_form.as_table }}
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 {% endif %}
 </div>
 {% endblock %}

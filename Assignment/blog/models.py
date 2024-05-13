@@ -31,7 +31,6 @@ class Post(models.Model):
         Category, on_delete=models.PROTECT, default=1)
     title = models.CharField(max_length=250)
     image = models.ImageField(_("Image"), upload_to=upload_to, default='posts/default.jpg', blank=True)
-    excerpt = models.TextField(blank=True)
     content = models.TextField()
     slug = models.SlugField(max_length=250)
     published = models.DateTimeField(default=timezone.now)
