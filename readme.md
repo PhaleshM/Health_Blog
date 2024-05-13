@@ -1,4 +1,4 @@
-# Django Health Blog ![Link](https://phalesh2.pythonanywhere.com/)
+# Django Health Blog [Link](https://phalesh2.pythonanywhere.com/)
 
 This is a health blog platform built using Django, a high-level Python web framework. It allows users to read and write health-related articles, comment on posts, and interact with other users.
 
