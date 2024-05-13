@@ -50,9 +50,16 @@ This is a health blog platform built using Django, a high-level Python web frame
 
 ## Usage
 
-- Visit the homepage to browse through the latest blog posts.
-- Sign up or log in to create new posts or comment on existing ones.
-- Use the search bar to find posts by title or content.
-- Click on a post to view its details, including comments.
-- Users can view their posts and comments in their profile.
-- Only the owner of a comment and the author of the post on which the comment is made can delete the comment.
+- Browse Latest Posts: Visit the homepage to browse through the latest blog posts.
+
+- Sign Up or Log In: Sign up or log in to create new posts or comment on existing ones.
+
+- Search Posts: Use the search bar to find posts by title or content.
+
+- View Post Details: Click on a post to view its details, including comments.
+
+- User Profile: Users can view their posts and comments in their profile.
+
+- Delete Comments: Only the owner of a comment and the author of the post on which the comment is made can delete the comment.
+
+- Update Post: Users can change the status of their posts from their profile and then navigate to the detail view to update them.
