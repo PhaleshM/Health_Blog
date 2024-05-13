@@ -22,31 +22,37 @@ This is a health blog platform built using Django, a high-level Python web frame
    git clone https://github.com/PhaleshM/Health_Blog.git
    ```
 
-2. Install the required dependencies:
+2. Navigate to the project directory:
+
+   ```bash
+   cd Health_Blog
+   ```
+
+3. Install the required dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Navigate to the project directory:
+4. Navigate to the working directory:
 
    ```bash
    cd Assignment
    ```
 
-4. Apply database migrations:
+5. Apply database migrations:
 
    ```bash
    python manage.py migrate
    ```
 
-5. Run the development server:
+6. Run the development server:
 
    ```bash
    python manage.py runserver
    ```
 
-6. Access the application in your web browser at `http://localhost:8000`.
+7. Access the application in your web browser at `http://localhost:8000`.
 
 ## Usage
 
